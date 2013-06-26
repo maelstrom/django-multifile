@@ -4,17 +4,14 @@ class MultiFileInput(forms.widgets.FileInput):
     """A multiple-file file input widget."""
 
     class Media:
-        js = ('js/jquery.js', 'js/jquery.multifile.js', )
+        js = ('js/multifile.js', )
 
     def render(self, name, value, attrs=None):
-        """Render as usual, but with added class."""
+        """Render as usual, but with added `multiple` attribute."""
         if attrs is None:
             attrs = {}
 
-        if attrs.has_key('class'):
-            attrs['class'] += ' multi'
-        else:
-            attrs['class'] = 'multi'
+        attrs.setdefault('multiple', 'multiple')
 
         return super(MultiFileInput, self).render(name, None, attrs=attrs)
 
