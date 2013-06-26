@@ -5,8 +5,15 @@ This is a Django app that provides simple support for multiple-file input
 fields in Django forms. This makes it easier to keep all your validation and
 handling code in the form class.
 
-It probably doesn't deserve to be an app, but I don't have enough repositories
-on [GitHub][1]!
+It is a fork of [Thomas Sutton's django-multifile app][1], modified to not use
+jQuery, amongst other things.
+
+Installing
+----------
+
+Install this app using `pip`. Then, make sure it is included in your
+`INSTALLED_FILES`. This is required so that the `js/multifile.js` script can be
+included in the page.
 
 Usage
 -----
@@ -14,20 +21,26 @@ Usage
 Using this is pretty simple: just import `multifile.forms.MultiFileField` and
 use it in a form!
 
-Of course, you'll need to make sure you've got the media (in particular,
-[jQuery][2] and the [Multiple File Upload][3] plugin) installed in the correct
-place. By default, they're included as `MEDIA_URL/js/jquery.js` and
-`MEDIA_URL/js/jquery.multifile.js`. If you need this to be somewhere else,
-you'd probably be better offer just modifying the code than me hacking some
-method of overriding media the paths.
+    # forms.py
+    from django import forms
+    from multifile.forms import MultiFileField
+
+    class UploadForm(forms.Form):
+        files = MultiFileField()
+
+
+
+    {# template.html #}
+    {{ form.media }}
+    {{ form }}
 
 License
 -------
 
-This package incorporates, but does not require, the *Multiple File Upload*
-jQuery plugin by *Fyneworks.com*. Any of the various similar plugins for
-jQuery or other JavaScript frameworks will also work!
+Same as the licence on [the parent project][1]. That licence is ambiguous, and
+this project no longer relies upon the mentioned projects, so I am not sure
+what happens with the license.
+
+I release as much as I am allowed to release of this work to the public domain.
 
 [1]: http://github.com/thsutton/
-[2]: http://www.jquery.com/
-[3]: http://www.fyneworks.com/jquery/multiple-file-upload/
